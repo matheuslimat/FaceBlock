@@ -1,19 +1,12 @@
 package facebookblock.test;
 
-import static org.junit.Assert.*;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class AbrirNavegador {
+public class MainTest {
 
 	public static FaceBlock faceBlock = new FaceBlock();
 	
