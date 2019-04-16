@@ -3,12 +3,14 @@ package model;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import facebookblock.test.ConstantesFaceBlock;
 import view.InterfaceLogin;
 
 public class Login {
 	
-	private InterfaceLogin firstView = new InterfaceLogin();
 	public ChromeDriver driver;
+	private InterfaceLogin firstView = new InterfaceLogin();
+	private Boolean isSecondView = false;
 	
 	public Login(ChromeDriver driver) {
 		this.driver = driver;
@@ -17,7 +19,7 @@ public class Login {
 
 	public void runLogin() throws InterruptedException {
 		firstView.formLogin(); // Chama a primeira tela
-		firstView.adicionarEventoLogin(driver);
+		firstView.adicionarEventoLogin();
 		
 		while(!firstView.getClick()) {
 			//pode gastar mto processamento função achar maneira melhor
@@ -26,6 +28,18 @@ public class Login {
 		
 		firstView.preencherCamposLogin(driver);
 		
+		if(validaLogin()) {
+			// Chama secondView a ideia é colocar fotos q o selenium pegar do perfil e etc...
+		}
+		
+	}
+	
+	public Boolean validaLogin() {
+		if(driver.getCurrentUrl().toString().equals(ConstantesFaceBlock.URL_SUCESS)) {
+			isSecondView = true;
+		}
+		
+		return isSecondView;
 	}
 	
 

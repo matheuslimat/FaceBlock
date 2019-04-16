@@ -32,35 +32,24 @@ public class InterfaceLogin implements ActionListener {
 	public void formLogin() {
 		frame.addWindowListener(new WindowListener() {
 
-			public void windowActivated(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowActivated(java.awt.event.WindowEvent arg0) {}
 
 			public void windowClosed(java.awt.event.WindowEvent arg0) {
 				new FaceBlock().quitBrowser();
 				System.exit(0);
 			}
 
-			public void windowClosing(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowClosing(java.awt.event.WindowEvent arg0) {}
 
-			public void windowDeactivated(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowDeactivated(java.awt.event.WindowEvent arg0) {}
 
-			public void windowDeiconified(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowDeiconified(java.awt.event.WindowEvent arg0) {}
 
-			public void windowIconified(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowIconified(java.awt.event.WindowEvent arg0) {}
 
-			public void windowOpened(java.awt.event.WindowEvent arg0) {
-				
-			}
+			public void windowOpened(java.awt.event.WindowEvent arg0) {}
 		});
+		
 		ajustaPosicaoLayout();
 		preencheTextoDefault();
 		adicionaElementos();
@@ -74,7 +63,6 @@ public class InterfaceLogin implements ActionListener {
 	
 	public void ajustaPosicaoLayout() {
 		frame.setSize(300, 200);
-		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 	}
 	
 	public void adicionaElementos() {
@@ -87,7 +75,7 @@ public class InterfaceLogin implements ActionListener {
  		frame.setVisible(true);
 	}
 	
-	public void adicionarEventoLogin(ChromeDriver driver) {
+	public void adicionarEventoLogin() {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setLogin(textLogin.getText());
@@ -100,10 +88,16 @@ public class InterfaceLogin implements ActionListener {
 	}
 	
 	public void preencherCamposLogin(ChromeDriver driver) {
-		WebElement login = driver.findElement(By.id("email"));
+		WebElement login = driver.findElement(By.id(ConstantesFaceBlock.EMAIL));
 		login.sendKeys(getLogin());
 		WebElement senha = driver.findElement(By.id(ConstantesFaceBlock.PASS));
 		senha.sendKeys(getSenha());
+		clickLogin(driver);
+	}
+	
+	public void clickLogin(ChromeDriver driver) {
+		WebElement btnLogin = driver.findElement(By.id(ConstantesFaceBlock.BTNLOGIN));
+		btnLogin.click();
 	}
 	
 	public void visibleLogin() {
@@ -135,6 +129,6 @@ public class InterfaceLogin implements ActionListener {
 		this.senha = senha;
 	}
 
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent arg0) {}
 
 }

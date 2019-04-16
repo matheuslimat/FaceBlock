@@ -7,7 +7,7 @@ import model.Login;
 
 public class FaceBlock {
 
-	public ChromeDriver driver;
+	public static ChromeDriver driver;
 	
 	public void run() {
 		System.setProperty("webdriver.chrome.driver", "C:/chromedriver.exe");
