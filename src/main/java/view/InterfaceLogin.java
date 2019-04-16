@@ -2,23 +2,65 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class InterfaceLogin implements ActionListener{
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import facebookblock.test.ConstantesFaceBlock;
+import facebookblock.test.FaceBlock;
+
+public class InterfaceLogin implements ActionListener {
 
 	private JFrame frame = new JFrame();
 	private JButton btnLogin = new JButton();
 	private JTextField textLogin = new JTextField();
 	private JTextField textPassword = new JTextField();
 	private JPanel painel = new JPanel();
+	public FaceBlock faceBlock = new FaceBlock();
 	private String login;
 	private String senha;
+	private Boolean click = false;
+	
 	
 	public void formLogin() {
+		frame.addWindowListener(new WindowListener() {
+
+			public void windowActivated(java.awt.event.WindowEvent arg0) {
+				
+			}
+
+			public void windowClosed(java.awt.event.WindowEvent arg0) {
+				new FaceBlock().quitBrowser();
+				System.exit(0);
+			}
+
+			public void windowClosing(java.awt.event.WindowEvent arg0) {
+				
+			}
+
+			public void windowDeactivated(java.awt.event.WindowEvent arg0) {
+				
+			}
+
+			public void windowDeiconified(java.awt.event.WindowEvent arg0) {
+				
+			}
+
+			public void windowIconified(java.awt.event.WindowEvent arg0) {
+				
+			}
+
+			public void windowOpened(java.awt.event.WindowEvent arg0) {
+				
+			}
+		});
 		ajustaPosicaoLayout();
 		preencheTextoDefault();
 		adicionaElementos();
@@ -32,6 +74,7 @@ public class InterfaceLogin implements ActionListener{
 	
 	public void ajustaPosicaoLayout() {
 		frame.setSize(300, 200);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 	}
 	
 	public void adicionaElementos() {
@@ -44,16 +87,38 @@ public class InterfaceLogin implements ActionListener{
  		frame.setVisible(true);
 	}
 	
-	public void adicionarEventoLogin() {
+	public void adicionarEventoLogin(ChromeDriver driver) {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setLogin(textLogin.getText());
 					setSenha(textPassword.getText());
 					frame.setVisible(false);
+					setClick(true);
+					
 			}
 		});
 	}
+	
+	public void preencherCamposLogin(ChromeDriver driver) {
+		WebElement login = driver.findElement(By.id("email"));
+		login.sendKeys(getLogin());
+		WebElement senha = driver.findElement(By.id(ConstantesFaceBlock.PASS));
+		senha.sendKeys(getSenha());
+	}
+	
+	public void visibleLogin() {
+		//frame.setVisible(true);
+		frame.toFront();
+	}
 
+	public Boolean getClick() {
+		return click;
+	}
+
+	public void setClick(Boolean click) {
+		this.click = click;
+	}
+	
 	public String getLogin() {
 		return login;
 	}
